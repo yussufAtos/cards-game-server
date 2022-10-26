@@ -11,8 +11,8 @@ public class CardsGameApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CardsGameApplication.class, args);
 		
-		CardServiceImpl CardServiceImpl =new CardServiceImpl();
-		CardServiceImpl.creatSortedHandByColorAndValue();
+//		CardServiceImpl CardServiceImpl =new CardServiceImpl();
+//		CardServiceImpl.creatSortedHandByColorAndValue();
 	}
 
 }

@@ -5,15 +5,39 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.card.model.Card;
+import com.card.model.CardDto;
 import com.card.service.CardService;
 
+@Service
 public class CardServiceImpl implements CardService {
 
 	private static final List<String> colors = List.of("Carreaux", "Coeur", "Pique", "Trèfle");
 	private static final List<String> values = List.of("AS", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Dame",
 			"Roi", "Valet");
 	private static final Integer HAND_NUMBER = 10;
+	
+	public CardDto playCards() {
+
+		List<Card> randomHamd = createRandomHand();
+		List<String> colorsOrder = createRandomColor();
+		List<String> valuesOrder = createRandomValue();
+		List<Card> sortedCards = creatSortedHandByColorAndValue(colorsOrder,valuesOrder,randomHamd);
+		System.out.println("valuesOrder :  " + valuesOrder);
+		System.out.println("colorsOrder :  " + colorsOrder);
+		System.out.println("randomHand  :  " + randomHamd);
+		System.out.println("sortedCards  : " + sortedCards);
+
+		CardDto cardDto = new CardDto();
+		cardDto.setRandomHand(randomHamd);
+		cardDto.setColorsOrder(colorsOrder);
+		cardDto.setValuesOrder(valuesOrder);
+		cardDto.setSortedCards(sortedCards);
+		return cardDto;
+	}
 
 	@Override
 	public List<Card> createRandomHand() {
@@ -30,24 +54,17 @@ public class CardServiceImpl implements CardService {
 
 	}
 
-	public List<Card> creatSortedHandByColorAndValue() {
-
-		List<String> randomColors = createRandomColor();
-		List<String> randomValues = createRandomValue();
+	public List<Card> creatSortedHandByColorAndValue(List<String> randomColors, List<String> randomValues,
+			List<Card> hand) {
 
 		Comparator<Card> colorComparator = (c1, c2) -> randomColors.indexOf(c1.getColor())
 				- randomColors.indexOf(c2.getColor());
 		Comparator<Card> valueComparator = (c1, c2) -> randomValues.indexOf(c1.getValue())
 				- randomValues.indexOf(c2.getValue());
 
-		List<Card> hand = createRandomHand();
-
-		System.out.println("hand : " + hand);
-
 		List<Card> sortedHand = hand.stream().sorted(colorComparator.thenComparing(valueComparator))
 				.collect(Collectors.toList());
 
-		System.out.println("sortedHand : " + sortedHand);
 		return sortedHand;
 	}
 
@@ -92,5 +109,7 @@ public class CardServiceImpl implements CardService {
 
 		return cards;
 	}
+
+
 
 }
