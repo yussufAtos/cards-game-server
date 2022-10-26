@@ -26,10 +26,7 @@ public class CardServiceImpl implements CardService {
 		List<String> colorsOrder = createRandomColor();
 		List<String> valuesOrder = createRandomValue();
 		List<Card> sortedCards = creatSortedHandByColorAndValue(colorsOrder,valuesOrder,randomHamd);
-		System.out.println("valuesOrder :  " + valuesOrder);
-		System.out.println("colorsOrder :  " + colorsOrder);
-		System.out.println("randomHand  :  " + randomHamd);
-		System.out.println("sortedCards  : " + sortedCards);
+
 
 		CardDto cardDto = new CardDto();
 		cardDto.setRandomHand(randomHamd);
