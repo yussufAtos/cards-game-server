@@ -19,20 +19,16 @@ public class CardServiceImplTest {
 	@Autowired
 	private CardService cardService;
 	private static final int HAND_NUMBER = 10;
-	private static final List<String> mockRandomColors = List.of("Trèfle", "Pique", "Carreaux", "Coeur");
-	private static final List<String> mockRandomvalues = List.of("2", "4", "AS", "5", "6", "8", "3", "9", "7", "Roi",
+	private static final List<String> mockColorsOrder = List.of("Trèfle", "Pique", "Carreaux", "Coeur");
+	private static final List<String> mockValuesOrder = List.of("2", "4", "AS", "5", "6", "8", "3", "9", "7", "Roi",
 			"10", "Valet", "Dame");
 
-	// [2, 4, AS, 5, 6, 8, 3, 9, 7, Roi, 10, Valet, Dame]
-//should_createRandomHand_return_expected_size_of_hand
-//should_creatSortedHandByColorAndValue_return_expected_sorted_cards_by_given_colors_and_values_order
 
 	@Test
 	void should_createRandomHand_return_hand_of_10_cards() {
-		System.out.println("hello test");
 
-		List<Card> cardsHand = cardService.createRandomHand();
-		assertEquals(cardsHand.size(), HAND_NUMBER);
+		List<Card> actualCardsHand = cardService.createRandomHand();
+		assertEquals(actualCardsHand.size(), HAND_NUMBER);
 
 	}
 
@@ -69,11 +65,9 @@ public class CardServiceImplTest {
 		expectedSortedHand.add(new Card("Coeur", "9"));
 		expectedSortedHand.add(new Card("Coeur", "Dame"));
 
-		List<Card> actualSortedHand = cardService.creatSortedHandByColorAndValue(mockRandomColors, mockRandomvalues,
+		List<Card> actualSortedHand = cardService.creatSortedHandByColorAndValue(mockColorsOrder, mockValuesOrder,
 				mockHand);
-
-		System.out.println("expected " + expectedSortedHand);
-
+		
 		assertEquals(expectedSortedHand, actualSortedHand);
 	}
 

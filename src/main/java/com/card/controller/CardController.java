@@ -12,7 +12,7 @@ import com.card.model.CardDto;
 import com.card.service.CardService;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "http://localhost:4300" })
 public class CardController {
 
 	private final CardService cardService;
